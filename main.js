@@ -19,9 +19,11 @@ function changeState2(){
 function changeState3(){
   often = "monthly"
 }
-
+console.log(container.childNodes)
 const fetchData = async () => {//GETTING AND MANAGING THE DATA
   fetch(URL).then(res=>res.json()).then(data => {
+
+   
 
     function getData(id){//FUNCTION TO CONSTRUCT THE CARDS WITH THE GIVEN DATA
   
@@ -43,7 +45,7 @@ const fetchData = async () => {//GETTING AND MANAGING THE DATA
         card.innerHTML =
         `
         <div class="bg">
-          <img src="/icons/${id}.png" alt="case" class="icon ${title}" />
+          <img src="./icons/${id}.png" alt="case" class="icon ${title}" />
         </div>
         <div class="data"> 
           <div class="title">
@@ -71,7 +73,7 @@ const fetchData = async () => {//GETTING AND MANAGING THE DATA
         card.innerHTML =
         `
         <div class="bg">
-          <img src="/icons/${id}.png" alt="case" class="icon ${title}" />
+          <img src="./icons/${id}.png" alt="case" class="icon ${title}" />
         </div>
         <div class="data"> 
           <div class="title">
@@ -98,7 +100,7 @@ const fetchData = async () => {//GETTING AND MANAGING THE DATA
         card.innerHTML =
         `
         <div class="bg">
-          <img src="/icons/${id}.png" alt="case" class="icon ${title}" />
+          <img src="./icons/${id}.png" alt="case" class="icon ${title}" />
         </div>
         <div class="data"> 
           <div class="title">
@@ -117,9 +119,18 @@ const fetchData = async () => {//GETTING AND MANAGING THE DATA
 
       }
     }
-      for (let i = 0; i < cardCounter; i++) {//GET THE DATA OF ALL THE ELEMENTS
-      getData(i); 
+      for (let i = 0; i < cardCounter; i++) {//GET THE DATA OF ALL THE ELEMENTS 
+        
+        let childs = container.childNodes
+
+        if (childs.length > 8){//remove previous cards
+          for(j = i + 8; j > 2 ; j--){
+            container.removeChild(childs[j])
+          }
+        }
+        getData(i);
     }
+
   }
   ).catch(error => console.error(error.message))
 }
@@ -141,7 +152,7 @@ function getDaily(){//VISUALY CHANGING THE STATE OF THE DOM
     day.style.color = "white";
     week.style.color = "gray";
     month.style.color = "gray";
-    fetchData()  
+   fetchData()  
 }
 
 function getWeekly(){//VISUALY CHANGING THE STATE OF THE DOM
@@ -154,8 +165,9 @@ function getWeekly(){//VISUALY CHANGING THE STATE OF THE DOM
 function getMonthly(){//VISUALY CHANGING THE STATE OF THE DOM
     day.style.color = "gray";
     week.style.color = "gray";
-    month.style.color = "white";  
+    month.style.color = "white"; 
     fetchData()  
 }
+
 
 getDaily()//WHEN THE PAGE LOADS THE STATE WILL BE DAILY
