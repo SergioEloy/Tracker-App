@@ -40,7 +40,7 @@ const fetchData = async () => {
         card.innerHTML =
         `
         <div class="bg">
-          <img src="/icons/${id}.png" alt="case" class="icon ${title}" />
+          <img src="https://sergioespadas-ksquare.github.io/icons/${id}.png" alt="case" class="icon ${title}" />
         </div>
         <div class="data"> 
           <div class="title">
@@ -68,7 +68,7 @@ const fetchData = async () => {
         card.innerHTML =
         `
         <div class="bg">
-          <img src="/icons/${id}.png" alt="case" class="icon ${title}" />
+          <img src="https://sergioespadas-ksquare.github.io/icons/${id}.png" alt="case" class="icon ${title}" />
         </div>
         <div class="data"> 
           <div class="title">
@@ -95,7 +95,7 @@ const fetchData = async () => {
         card.innerHTML =
         `
         <div class="bg">
-          <img src="/icons/${id}.png" alt="case" class="icon ${title}" />
+          <img src="https://sergioespadas-ksquare.github.io/icons/${id}.png" alt="case" class="icon ${title}" />
         </div>
         <div class="data"> 
           <div class="title">
