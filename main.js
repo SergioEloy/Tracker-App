@@ -1,11 +1,13 @@
+//we set the constants to work with the DOM
 const day = document.getElementById("daily");
 const week = document.getElementById("weekly");
 const month = document.getElementById("monthly");
 const container = document.querySelector(".container")
-const URL = "https://gist.githubusercontent.com/carmandomx/b27e23332eda1d061feb3cdada26afc0/raw/438d33407442d2abbf605e87336f48a83ccff3f5/data.json";
-let often = "daily"
+const URL = "https://gist.githubusercontent.com/carmandomx/b27e23332eda1d061feb3cdada26afc0/raw/438d33407442d2abbf605e87336f48a83ccff3f5/data.json";//URL TO GET THE DATA
+let often = "daily" //INITIAL VALUE
 const cardCounter = 6
 
+//FUNCTIONS TO CHANGE STATES OF THE TIMEFRAME
 function changeState1(){
   often = "daily"
 }
@@ -18,11 +20,12 @@ function changeState3(){
   often = "monthly"
 }
 
-const fetchData = async () => {
+const fetchData = async () => {//GETTING AND MANAGING THE DATA
   fetch(URL).then(res=>res.json()).then(data => {
 
-    function getData(id){
+    function getData(id){//FUNCTION TO CONSTRUCT THE CARDS WITH THE GIVEN DATA
   
+      //ASSIGNING THE DATA TO CONSTANTS
       const title = data[id].title;
       const dailyCurrent = data[id].timeframes.daily.current;
       const dailyPrevious = data[id].timeframes.daily.previous;
@@ -31,16 +34,16 @@ const fetchData = async () => {
       const monthlyCurrent = data[id].timeframes.monthly.current;
       const monthlyPrevious = data[id].timeframes.monthly.previous;
 
-      if(often == "daily"){
+      if(often == "daily"){//MANAGING THE STATES OF THE TIMEFRAME
         let current = dailyCurrent;
         let previous = dailyPrevious;  
         
-        const card = document.createElement("div");
+        const card = document.createElement("div");//CREATING THE CARDS
         card.classList.add(`card${id}`);
         card.innerHTML =
         `
         <div class="bg">
-          <img src="https://sergioespadas-ksquare.github.io/icons/${id}.png" alt="case" class="icon ${title}" />
+          <img src="/icons/${id}.png" alt="case" class="icon ${title}" />
         </div>
         <div class="data"> 
           <div class="title">
@@ -55,20 +58,20 @@ const fetchData = async () => {
           </div>
         </div>
         `
-          const cardContainer = container.appendChild(card)
+          const cardContainer = container.appendChild(card)//ADDING THE CARDS AS A CHILD OF THE CONTAINER
 
       }
   
-     else if(often == "weekly"){
+     else if(often == "weekly"){//MANAGING THE STATES OF THE TIMEFRAME
         let current = weeklyCurrent;
         let previous = weeklyPrevious; 
         
-        const card = document.createElement("div");
+        const card = document.createElement("div");//CREATING THE CARDS
         card.classList.add(`card${id}`);
         card.innerHTML =
         `
         <div class="bg">
-          <img src="https://sergioespadas-ksquare.github.io/icons/${id}.png" alt="case" class="icon ${title}" />
+          <img src="/icons/${id}.png" alt="case" class="icon ${title}" />
         </div>
         <div class="data"> 
           <div class="title">
@@ -83,19 +86,19 @@ const fetchData = async () => {
           </div>
         </div>
         `
-          const cardContainer = container.appendChild(card)
+          const cardContainer = container.appendChild(card)//ADDING THE CARDS AS A CHILD OF THE CONTAINER
 
       }
-     else if(often == "monthly"){
+     else if(often == "monthly"){//MANAGING THE STATES OF THE TIMEFRAME
         let current = monthlyCurrent;
         let previous = monthlyPrevious;
 
-        const card = document.createElement("div");
+        const card = document.createElement("div");//CREATING THE CARDS
         card.classList.add(`card${id}`);
         card.innerHTML =
         `
         <div class="bg">
-          <img src="https://sergioespadas-ksquare.github.io/icons/${id}.png" alt="case" class="icon ${title}" />
+          <img src="/icons/${id}.png" alt="case" class="icon ${title}" />
         </div>
         <div class="data"> 
           <div class="title">
@@ -110,51 +113,49 @@ const fetchData = async () => {
           </div>
         </div>
         `
-          const cardContainer = container.appendChild(card)
+          const cardContainer = container.appendChild(card)//ADDING THE CARDS AS A CHILD OF THE CONTAINER
 
       }
     }
-      for (let i = 0; i < cardCounter; i++) {
+      for (let i = 0; i < cardCounter; i++) {//GET THE DATA OF ALL THE ELEMENTS
       getData(i); 
     }
   }
   ).catch(error => console.error(error.message))
 }
 
-day.addEventListener("click" , (event) => {
+day.addEventListener("click" , (event) => {//ADDING AN EVENT LISTENER TO EXECUTE FUNCTIONS
     getDaily();
     changeState1();
 })
-week.addEventListener("click" , (event) => {
+week.addEventListener("click" , (event) => {//ADDING AN EVENT LISTENER TO EXECUTE FUNCTIONS
     getWeekly();
     changeState2();
 })
-month.addEventListener("click" , (event) =>{
+month.addEventListener("click" , (event) =>{//ADDING AN EVENT LISTENER TO EXECUTE FUNCTIONS
     getMonthly();
     changeState3();
 })
 
-function getDaily(){
+function getDaily(){//VISUALY CHANGING THE STATE OF THE DOM
     day.style.color = "white";
     week.style.color = "gray";
     month.style.color = "gray";
     fetchData()  
 }
 
-function getWeekly(){
+function getWeekly(){//VISUALY CHANGING THE STATE OF THE DOM
     day.style.color = "gray";
     week.style.color = "white";
     month.style.color = "gray"; 
     fetchData()  
 }
 
-function getMonthly(){
+function getMonthly(){//VISUALY CHANGING THE STATE OF THE DOM
     day.style.color = "gray";
     week.style.color = "gray";
     month.style.color = "white";  
     fetchData()  
 }
 
-getDaily()
-
-//updated
+getDaily()//WHEN THE PAGE LOADS THE STATE WILL BE DAILY
